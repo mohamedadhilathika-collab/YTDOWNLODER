@@ -1,4 +1,5 @@
 const express = require("express");
+const { exec } = require("child_process");
 
 const app = express();
 
@@ -6,7 +7,28 @@ app.use(express.static(__dirname));
 
 app.get("/download", (req, res) => {
 
-    res.send("Download system working");
+    const url = req.query.url;
+
+    if (!url) {
+        return res.send("No URL Provided");
+    }
+
+    const command =
+    `yt-dlp -f "22/best" "${url}"`;
+
+    exec(command, (error, stdout, stderr) => {
+
+        if (error) {
+
+            console.log(stderr);
+
+            return res.send("Download Failed");
+
+        }
+
+        res.send("Download Complete");
+
+    });
 
 });
 
