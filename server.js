@@ -14,19 +14,20 @@ app.get("/download", (req, res) => {
     }
 
     const command =
-    `yt-dlp -f "bestvideo[height<=1080]+bestaudio/best" -o "/storage/emulated/0/Download/%(title)s.%(ext)s" "${url}"`;
+    `yt-dlp -f "22/best" -o "/storage/emulated/0/Download/%(title)s.%(ext)s" "${url}"`;
 
     exec(command, (error, stdout, stderr) => {
 
-if (error) {
+        if (error) {
 
-    console.log("ERROR:");
-    console.log(error);
+            console.log("ERROR:");
+            console.log(error);
 
-    console.log("STDERR:");
-    console.log(stderr);
+            console.log(stderr);
 
-    return res.send("Download Failed");
+            return res.send("Download Failed");
+
+        }
 
         res.send("Download Complete! Check Downloads Folder.");
 
@@ -37,5 +38,7 @@ if (error) {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
+
     console.log(`Server running on ${PORT}`);
+
 });
