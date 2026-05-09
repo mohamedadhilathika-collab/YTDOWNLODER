@@ -26,8 +26,7 @@ app.get("/download", (req, res) => {
 
         }
 
-        res.send("Download Complete");
-
+res.send(stdout || "Download Complete");
     });
 
 });
