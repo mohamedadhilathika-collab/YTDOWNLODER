@@ -18,13 +18,15 @@ app.get("/download", (req, res) => {
 
     exec(command, (error, stdout, stderr) => {
 
-        if (error) {
+if (error) {
 
-            console.log(stderr);
+    console.log("ERROR:");
+    console.log(error);
 
-            return res.send("Download Failed");
+    console.log("STDERR:");
+    console.log(stderr);
 
-        }
+    return res.send("Download Failed");
 
         res.send("Download Complete! Check Downloads Folder.");
 
